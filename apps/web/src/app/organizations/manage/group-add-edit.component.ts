@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { DIALOG_DATA, DialogConfig, DialogRef } from "@angular/cdk/dialog";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, Validators } from "@angular/forms";
 
 import { ApiService } from "@bitwarden/common/abstractions/api.service";
@@ -10,6 +11,7 @@ import { CollectionData } from "@bitwarden/common/models/data/collection.data";
 import { Collection } from "@bitwarden/common/models/domain/collection";
 import { GroupRequest } from "@bitwarden/common/models/request/group.request";
 import { CollectionDetailsResponse } from "@bitwarden/common/models/response/collection.response";
+import { DialogService } from "@bitwarden/components";
 
 import {
   AccessItemType,
@@ -22,19 +24,63 @@ import {
 import { GroupServiceAbstraction } from "../services/abstractions/group";
 import { GroupView } from "../views/group.view";
 
+/**
+ * Indices for the available tabs in the dialog
+ */
+export enum GroupAddEditTabType {
+  Info = 0,
+  Members = 1,
+  Collection = 2,
+}
+
+export interface GroupAddEditDialogParams {
+  /**
+   * ID of the organization the group belongs to
+   */
+  organizationId: string;
+
+  /**
+   * Optional ID of the group being modified
+   */
+  groupId?: string;
+
+  /**
+   * Tab to open when the dialog is open.
+   * Defaults to Group Info
+   */
+  initialTab?: GroupAddEditTabType;
+}
+
+export enum GroupAddEditDialogResultType {
+  Saved = "saved",
+  Canceled = "canceled",
+  Deleted = "deleted",
+}
+
+/**
+ * Strongly typed helper to open a groupAddEditDialog
+ * @param dialogService Instance of the dialog service that will be used to open the dialog
+ * @param config Configuration for the dialog
+ */
+export const openGroupAddEditDialog = (
+  dialogService: DialogService,
+  config: DialogConfig<GroupAddEditDialogParams>
+) => {
+  return dialogService.open<GroupAddEditDialogResultType, GroupAddEditDialogParams>(
+    GroupAddEditComponent,
+    config
+  );
+};
+
 @Component({
   selector: "app-group-add-edit",
   templateUrl: "group-add-edit.component.html",
 })
 export class GroupAddEditComponent implements OnInit {
-  @Input() groupId: string;
-  @Input() organizationId: string;
-  @Output() onSavedGroup = new EventEmitter();
-  @Output() onDeletedGroup = new EventEmitter();
-
   protected permissionMode = PermissionMode;
+  protected resultType = GroupAddEditDialogResultType;
 
-  tabIndex = 0;
+  tabIndex: GroupAddEditTabType;
   loading = true;
   editMode = false;
   title: string;
@@ -52,7 +98,17 @@ export class GroupAddEditComponent implements OnInit {
     collections: new FormControl<AccessItemValue[]>([]),
   });
 
+  get groupId(): string | undefined {
+    return this.params.groupId;
+  }
+
+  get organizationId(): string {
+    return this.params.organizationId;
+  }
+
   constructor(
+    @Inject(DIALOG_DATA) private params: GroupAddEditDialogParams,
+    private dialogRef: DialogRef<GroupAddEditDialogResultType>,
     private apiService: ApiService,
     private groupService: GroupServiceAbstraction,
     private i18nService: I18nService,
@@ -60,7 +116,9 @@ export class GroupAddEditComponent implements OnInit {
     private platformUtilsService: PlatformUtilsService,
     private logService: LogService,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+    this.tabIndex = params.initialTab ?? GroupAddEditTabType.Info;
+  }
 
   async ngOnInit() {
     this.editMode = this.loading = this.groupId != null;
@@ -150,7 +208,7 @@ export class GroupAddEditComponent implements OnInit {
         null,
         this.i18nService.t(this.editMode ? "editedGroupId" : "createdGroupId", formValue.name)
       );
-      this.onSavedGroup.emit();
+      this.dialogRef.close(GroupAddEditDialogResultType.Saved);
     } catch (e) {
       this.logService.error(e);
     }
@@ -180,7 +238,7 @@ export class GroupAddEditComponent implements OnInit {
         null,
         this.i18nService.t("deletedGroupId", this.group.name)
       );
-      this.onDeletedGroup.emit();
+      this.dialogRef.close(GroupAddEditDialogResultType.Deleted);
     } catch (e) {
       this.logService.error(e);
     }

@@ -68,7 +68,13 @@
       <button bitButton buttonType="primary" type="submit" [loading]="form.loading">
         {{ "save" | i18n }}
       </button>
-      <button bitButton buttonType="secondary" type="button" bitDialogClose>
+      <button
+        bitButton
+        buttonType="secondary"
+        type="button"
+        bitDialogClose
+        [bit-dialog-close]="resultType.Canceled"
+      >
         {{ "cancel" | i18n }}
       </button>
       <button

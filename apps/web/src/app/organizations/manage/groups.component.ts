@@ -36,7 +36,11 @@ import { DialogService } from "@bitwarden/components";
 import { GroupServiceAbstraction } from "../services/abstractions/group";
 import { GroupView } from "../views/group.view";
 
-import { GroupAddEditComponent } from "./group-add-edit.component";
+import {
+  GroupAddEditDialogResultType,
+  GroupAddEditTabType,
+  openGroupAddEditDialog,
+} from "./group-add-edit.component";
 
 type CollectionViewMap = {
   [id: string]: CollectionView;
@@ -192,22 +196,22 @@ export class GroupsComponent implements OnInit, OnDestroy {
     this.didScroll = this.pagedGroups.length > this.pageSize;
   }
 
-  async edit(group: GroupDetailsRow, startingTabIndex = 0) {
-    const dialogRef = this.dialogService.open(GroupAddEditComponent, {
+  edit(group: GroupDetailsRow, startingTabIndex: GroupAddEditTabType = GroupAddEditTabType.Info) {
+    const dialogRef = openGroupAddEditDialog(this.dialogService, {
       positionStrategy: this.overlay.position().global().centerHorizontally(),
+      data: {
+        initialTab: startingTabIndex,
+        organizationId: this.organizationId,
+        groupId: group != null ? group.details.id : null,
+      },
     });
 
-    const comp = dialogRef.componentInstance;
-    comp.tabIndex = startingTabIndex;
-    comp.organizationId = this.organizationId;
-    comp.groupId = group != null ? group.details.id : null;
-    comp.onSavedGroup.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      dialogRef.close();
-      this.refreshGroups$.next();
-    });
-    comp.onDeletedGroup.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      dialogRef.close();
-      this.removeGroup(group.details.id);
+    dialogRef.closed.pipe(takeUntil(this.destroy$)).subscribe((result) => {
+      if (result == GroupAddEditDialogResultType.Saved) {
+        this.refreshGroups$.next();
+      } else if (result == GroupAddEditDialogResultType.Deleted) {
+        this.removeGroup(group.details.id);
+      }
     });
   }
 
