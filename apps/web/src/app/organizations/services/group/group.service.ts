@@ -1,16 +1,13 @@
 import { Injectable } from "@angular/core";
 
 import { ApiService } from "@bitwarden/common/abstractions/api.service";
-import {
-  GroupDetailsResponse,
-  GroupResponse,
-} from "@bitwarden/common/models/response/group.response";
 import { ListResponse } from "@bitwarden/common/models/response/list.response";
 
 import { GroupView } from "../../views/group.view";
-import { GroupServiceAbstraction } from "../abstractions/group";
+import { GroupRequest, GroupServiceAbstraction } from "../abstractions/group";
 
 import { OrganizationGroupBulkRequest } from "./requests/organization-group-bulk.request";
+import { GroupDetailsResponse, GroupResponse } from "./responses/group.response";
 
 @Injectable()
 export class GroupService implements GroupServiceAbstraction {
@@ -65,5 +62,27 @@ export class GroupService implements GroupServiceAbstraction {
     const listResponse = new ListResponse(r, GroupDetailsResponse);
 
     return listResponse.data?.map((gr) => GroupView.fromResponse(gr)) ?? [];
+  }
+
+  async postGroup(organizationId: string, request: GroupRequest): Promise<GroupView> {
+    const r = await this.apiService.send(
+      "POST",
+      "/organizations/" + organizationId + "/groups",
+      request,
+      true,
+      true
+    );
+    return GroupView.fromResponse(new GroupResponse(r));
+  }
+
+  async putGroup(organizationId: string, id: string, request: GroupRequest): Promise<GroupView> {
+    const r = await this.apiService.send(
+      "PUT",
+      "/organizations/" + organizationId + "/groups/" + id,
+      request,
+      true,
+      true
+    );
+    return GroupView.fromResponse(new GroupResponse(r));
   }
 }

@@ -9,7 +9,6 @@ import { LogService } from "@bitwarden/common/abstractions/log.service";
 import { PlatformUtilsService } from "@bitwarden/common/abstractions/platformUtils.service";
 import { CollectionData } from "@bitwarden/common/models/data/collection.data";
 import { Collection } from "@bitwarden/common/models/domain/collection";
-import { GroupRequest } from "@bitwarden/common/models/request/group.request";
 import { CollectionDetailsResponse } from "@bitwarden/common/models/response/collection.response";
 import { DialogService } from "@bitwarden/components";
 
@@ -21,7 +20,7 @@ import {
   convertToSelectionReadOnly,
   PermissionMode,
 } from "../components/access-selector";
-import { GroupServiceAbstraction } from "../services/abstractions/group";
+import { GroupRequest, GroupServiceAbstraction } from "../services/abstractions/group";
 import { GroupView } from "../views/group.view";
 
 /**
@@ -198,9 +197,9 @@ export class GroupAddEditComponent implements OnInit {
 
     try {
       if (this.editMode) {
-        this.formPromise = this.apiService.putGroup(this.organizationId, this.groupId, request);
+        this.formPromise = this.groupService.putGroup(this.organizationId, this.groupId, request);
       } else {
-        this.formPromise = this.apiService.postGroup(this.organizationId, request);
+        this.formPromise = this.groupService.postGroup(this.organizationId, request);
       }
       await this.formPromise;
       this.platformUtilsService.showToast(

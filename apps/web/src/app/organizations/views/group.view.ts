@@ -1,6 +1,7 @@
-import { GroupResponse } from "@bitwarden/common/models/response/group.response";
 import { SelectionReadOnlyResponse } from "@bitwarden/common/models/response/selection-read-only.response";
 import { View } from "@bitwarden/common/models/view/view";
+
+import { GroupResponse } from "../services/group/responses/group.response";
 
 export class GroupView implements View {
   id: string;
