@@ -3,8 +3,8 @@ import { Injector, LOCALE_ID, NgModule } from "@angular/core";
 import { AbstractEncryptService } from "@bitwarden/common/abstractions/abstractEncrypt.service";
 import { AccountApiService as AccountApiServiceAbstraction } from "@bitwarden/common/abstractions/account/account-api.service";
 import {
-  InternalAccountService,
   AccountService as AccountServiceAbstraction,
+  InternalAccountService,
 } from "@bitwarden/common/abstractions/account/account.service";
 import { AnonymousHubService as AnonymousHubServiceAbstraction } from "@bitwarden/common/abstractions/anonymousHub.service";
 import { ApiService as ApiServiceAbstraction } from "@bitwarden/common/abstractions/api.service";
@@ -28,7 +28,6 @@ import {
   InternalFolderService,
 } from "@bitwarden/common/abstractions/folder/folder.service.abstraction";
 import { FormValidationErrorsService as FormValidationErrorsServiceAbstraction } from "@bitwarden/common/abstractions/formValidationErrors.service";
-import { GroupServiceAbstraction } from "@bitwarden/common/abstractions/group";
 import { I18nService as I18nServiceAbstraction } from "@bitwarden/common/abstractions/i18n.service";
 import { KeyConnectorService as KeyConnectorServiceAbstraction } from "@bitwarden/common/abstractions/keyConnector.service";
 import { LogService } from "@bitwarden/common/abstractions/log.service";
@@ -86,7 +85,6 @@ import { FileUploadService } from "@bitwarden/common/services/fileUpload.service
 import { FolderApiService } from "@bitwarden/common/services/folder/folder-api.service";
 import { FolderService } from "@bitwarden/common/services/folder/folder.service";
 import { FormValidationErrorsService } from "@bitwarden/common/services/formValidationErrors.service";
-import { GroupService } from "@bitwarden/common/services/group/group.service";
 import { KeyConnectorService } from "@bitwarden/common/services/keyConnector.service";
 import { NotificationsService } from "@bitwarden/common/services/notifications.service";
 import { OrganizationApiService } from "@bitwarden/common/services/organization/organization-api.service";
@@ -574,11 +572,6 @@ import { AbstractThemingService } from "./theming/theming.service.abstraction";
       provide: ValidationServiceAbstraction,
       useClass: ValidationService,
       deps: [I18nServiceAbstraction, PlatformUtilsServiceAbstraction],
-    },
-    {
-      provide: GroupServiceAbstraction,
-      useClass: GroupService,
-      deps: [ApiServiceAbstraction],
     },
   ],
 })

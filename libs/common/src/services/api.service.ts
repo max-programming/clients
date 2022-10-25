@@ -1,7 +1,6 @@
 import { ApiService as ApiServiceAbstraction } from "../abstractions/api.service";
 import { AppIdService } from "../abstractions/appId.service";
 import { EnvironmentService } from "../abstractions/environment.service";
-import { GroupResponse } from "../abstractions/group";
 import { PlatformUtilsService } from "../abstractions/platformUtils.service";
 import { TokenService } from "../abstractions/token.service";
 import { DeviceType } from "../enums/deviceType";
@@ -114,6 +113,7 @@ import {
 } from "../models/response/emergency-access.response";
 import { ErrorResponse } from "../models/response/error.response";
 import { EventResponse } from "../models/response/event.response";
+import { GroupResponse } from "../models/response/group.response";
 import { IdentityCaptchaResponse } from "../models/response/identity-captcha.response";
 import { IdentityTokenResponse } from "../models/response/identity-token.response";
 import { IdentityTwoFactorResponse } from "../models/response/identity-two-factor.response";
@@ -129,8 +129,8 @@ import { OrganizationUserBulkPublicKeyResponse } from "../models/response/organi
 import { OrganizationUserBulkResponse } from "../models/response/organization-user-bulk.response";
 import {
   OrganizationUserDetailsResponse,
-  OrganizationUserUserDetailsResponse,
   OrganizationUserResetPasswordDetailsReponse,
+  OrganizationUserUserDetailsResponse,
 } from "../models/response/organization-user.response";
 import { PaymentResponse } from "../models/response/payment.response";
 import { PlanResponse } from "../models/response/plan.response";

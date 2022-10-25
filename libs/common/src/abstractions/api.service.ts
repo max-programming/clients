@@ -104,6 +104,7 @@ import {
   EmergencyAccessViewResponse,
 } from "../models/response/emergency-access.response";
 import { EventResponse } from "../models/response/event.response";
+import { GroupResponse } from "../models/response/group.response";
 import { IdentityCaptchaResponse } from "../models/response/identity-captcha.response";
 import { IdentityTokenResponse } from "../models/response/identity-token.response";
 import { IdentityTwoFactorResponse } from "../models/response/identity-two-factor.response";
@@ -160,8 +161,6 @@ import {
 import { TwoFactorYubiKeyResponse } from "../models/response/two-factor-yubi-key.response";
 import { UserKeyResponse } from "../models/response/user-key.response";
 import { SendAccessView } from "../models/view/send-access.view";
-
-import { GroupResponse } from "./group/responses/group.response";
 
 export abstract class ApiService {
   send: (
