@@ -48,6 +48,16 @@ type CollectionViewMap = {
 
 type GroupDetailsRow = {
   /**
+   * Group Id (used for searching)
+   */
+  id: string;
+
+  /**
+   * Group name (used for searching)
+   */
+  name: string;
+
+  /**
    * Details used for displaying group information
    */
   details: GroupView;
@@ -146,6 +156,8 @@ export class GroupsComponent implements OnInit, OnDestroy {
           return groups
             .sort(Utils.getSortFunction(this.i18nService, "name"))
             .map<GroupDetailsRow>((g) => ({
+              id: g.id,
+              name: g.name,
               details: g,
               checked: false,
               collectionNames: g.collections
