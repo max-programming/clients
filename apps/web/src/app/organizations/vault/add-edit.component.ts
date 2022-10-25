@@ -31,6 +31,7 @@ import { AddEditComponent as BaseAddEditComponent } from "../../vault/add-edit.c
 export class AddEditComponent extends BaseAddEditComponent {
   organization: Organization;
   originalCipher: Cipher = null;
+  protected override componentName = "app-org-vault-add-edit";
 
   constructor(
     cipherService: CipherService,
