@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, Validators } from "@angular/forms";
 
 import { ApiService } from "@bitwarden/common/abstractions/api.service";
 import { CollectionService } from "@bitwarden/common/abstractions/collection.service";
-import { GroupServiceAbstraction } from "@bitwarden/common/abstractions/group";
 import { I18nService } from "@bitwarden/common/abstractions/i18n.service";
 import { LogService } from "@bitwarden/common/abstractions/log.service";
 import { PlatformUtilsService } from "@bitwarden/common/abstractions/platformUtils.service";
@@ -11,7 +10,6 @@ import { CollectionData } from "@bitwarden/common/models/data/collection.data";
 import { Collection } from "@bitwarden/common/models/domain/collection";
 import { GroupRequest } from "@bitwarden/common/models/request/group.request";
 import { CollectionDetailsResponse } from "@bitwarden/common/models/response/collection.response";
-import { GroupView } from "@bitwarden/common/models/view/group-view";
 
 import {
   AccessItemType,
@@ -21,6 +19,8 @@ import {
   convertToSelectionReadOnly,
   PermissionMode,
 } from "../components/access-selector";
+import { GroupServiceAbstraction } from "../services/abstractions/group";
+import { GroupView } from "../views/group.view";
 
 @Component({
   selector: "app-group-add-edit",

@@ -1,7 +1,6 @@
-import { GroupResponse } from "../../abstractions/group";
-import { SelectionReadOnlyResponse } from "../../models/response/selection-read-only.response";
-
-import { View } from "./view";
+import { GroupResponse } from "@bitwarden/common/models/response/group.response";
+import { SelectionReadOnlyResponse } from "@bitwarden/common/models/response/selection-read-only.response";
+import { View } from "@bitwarden/common/models/view/view";
 
 export class GroupView implements View {
   id: string;

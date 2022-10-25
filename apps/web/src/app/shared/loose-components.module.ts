@@ -34,7 +34,6 @@ import { BulkConfirmComponent as OrgBulkConfirmComponent } from "../organization
 import { BulkRemoveComponent as OrgBulkRemoveComponent } from "../organizations/manage/bulk/bulk-remove.component";
 import { BulkRestoreRevokeComponent as OrgBulkRestoreRevokeComponent } from "../organizations/manage/bulk/bulk-restore-revoke.component";
 import { BulkStatusComponent as OrgBulkStatusComponent } from "../organizations/manage/bulk/bulk-status.component";
-import { CollectionAddEditComponent as OrgCollectionAddEditComponent } from "../organizations/manage/collection-add-edit.component";
 import { CollectionsComponent as OrgManageCollectionsComponent } from "../organizations/manage/collections.component";
 import { EntityEventsComponent as OrgEntityEventsComponent } from "../organizations/manage/entity-events.component";
 import { EventsComponent as OrgEventsComponent } from "../organizations/manage/events.component";
@@ -43,7 +42,6 @@ import { PeopleComponent as OrgPeopleComponent } from "../organizations/manage/p
 import { ResetPasswordComponent as OrgResetPasswordComponent } from "../organizations/manage/reset-password.component";
 import { UserAddEditComponent as OrgUserAddEditComponent } from "../organizations/manage/user-add-edit.component";
 import { UserConfirmComponent as OrgUserConfirmComponent } from "../organizations/manage/user-confirm.component";
-import { UserGroupsComponent as OrgUserGroupsComponent } from "../organizations/manage/user-groups.component";
 import { AcceptFamilySponsorshipComponent } from "../organizations/sponsorships/accept-family-sponsorship.component";
 import { FamiliesForEnterpriseSetupComponent } from "../organizations/sponsorships/families-for-enterprise-setup.component";
 import { ExposedPasswordsReportComponent as OrgExposedPasswordsReportComponent } from "../organizations/tools/exposed-passwords-report.component";
@@ -184,7 +182,6 @@ import { SharedModule } from ".";
     OrgBulkRestoreRevokeComponent,
     OrgBulkRemoveComponent,
     OrgBulkStatusComponent,
-    OrgCollectionAddEditComponent,
     OrgCollectionsComponent,
     OrgEntityEventsComponent,
     OrgEventsComponent,
@@ -199,7 +196,6 @@ import { SharedModule } from ".";
     OrgUnsecuredWebsitesReportComponent,
     OrgUserAddEditComponent,
     OrgUserConfirmComponent,
-    OrgUserGroupsComponent,
     OrgWeakPasswordsReportComponent,
     GeneratorComponent,
     PasswordGeneratorHistoryComponent,
@@ -306,7 +302,6 @@ import { SharedModule } from ".";
     OrgBulkRestoreRevokeComponent,
     OrgBulkRemoveComponent,
     OrgBulkStatusComponent,
-    OrgCollectionAddEditComponent,
     OrgCollectionsComponent,
     OrgEntityEventsComponent,
     OrgEventsComponent,
@@ -321,7 +316,6 @@ import { SharedModule } from ".";
     OrgUnsecuredWebsitesReportComponent,
     OrgUserAddEditComponent,
     OrgUserConfirmComponent,
-    OrgUserGroupsComponent,
     OrgWeakPasswordsReportComponent,
     GeneratorComponent,
     PasswordGeneratorHistoryComponent,
