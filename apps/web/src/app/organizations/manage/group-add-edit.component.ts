@@ -30,7 +30,7 @@ import { GroupView } from "../views/group.view";
 export enum GroupAddEditTabType {
   Info = 0,
   Members = 1,
-  Collection = 2,
+  Collections = 2,
 }
 
 export interface GroupAddEditDialogParams {
