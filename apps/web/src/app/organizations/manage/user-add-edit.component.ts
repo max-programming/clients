@@ -4,9 +4,11 @@ import { ApiService } from "@bitwarden/common/abstractions/api.service";
 import { CollectionService } from "@bitwarden/common/abstractions/collection.service";
 import { I18nService } from "@bitwarden/common/abstractions/i18n.service";
 import { LogService } from "@bitwarden/common/abstractions/log.service";
+import { OrganizationService } from "@bitwarden/common/abstractions/organization/organization.service.abstraction";
 import { PlatformUtilsService } from "@bitwarden/common/abstractions/platformUtils.service";
 import { OrganizationUserStatusType } from "@bitwarden/common/enums/organizationUserStatusType";
 import { OrganizationUserType } from "@bitwarden/common/enums/organizationUserType";
+import { ProductType } from "@bitwarden/common/enums/productType";
 import { PermissionsApi } from "@bitwarden/common/models/api/permissions.api";
 import { CollectionData } from "@bitwarden/common/models/data/collection.data";
 import { Collection } from "@bitwarden/common/models/domain/collection";
@@ -43,6 +45,7 @@ export class UserAddEditComponent implements OnInit {
   formPromise: Promise<any>;
   deletePromise: Promise<any>;
   organizationUserType = OrganizationUserType;
+  canUseCustomPermissions: boolean;
 
   manageAllCollectionsCheckboxes = [
     {
@@ -84,11 +87,15 @@ export class UserAddEditComponent implements OnInit {
     private i18nService: I18nService,
     private collectionService: CollectionService,
     private platformUtilsService: PlatformUtilsService,
+    private organizationService: OrganizationService,
     private logService: LogService
   ) {}
 
   async ngOnInit() {
     this.editMode = this.loading = this.organizationUserId != null;
+    const organization = this.organizationService.get(this.organizationId);
+    this.canUseCustomPermissions =
+      organization.useCustomPermissions && organization.planProductType === ProductType.Enterprise;
     await this.loadCollections();
 
     if (this.editMode) {
@@ -163,6 +170,15 @@ export class UserAddEditComponent implements OnInit {
   }
 
   async submit() {
+    if (!this.canUseCustomPermissions) {
+      this.platformUtilsService.showToast(
+        "error",
+        null,
+        this.i18nService.t("customNonEnterpriseError")
+      );
+      return;
+    }
+
     let collections: SelectionReadOnlyRequest[] = null;
     if (this.access !== "all") {
       collections = this.collections
