@@ -20,6 +20,7 @@ export class Organization {
   useSso: boolean;
   useKeyConnector: boolean;
   useScim: boolean;
+  useCustomPermissions: boolean;
   useResetPassword: boolean;
   selfHost: boolean;
   usersGetPremium: boolean;
@@ -64,6 +65,7 @@ export class Organization {
     this.useSso = obj.useSso;
     this.useKeyConnector = obj.useKeyConnector;
     this.useScim = obj.useScim;
+    this.useCustomPermissions = obj.useCustomPermissions;
     this.useResetPassword = obj.useResetPassword;
     this.selfHost = obj.selfHost;
     this.usersGetPremium = obj.usersGetPremium;
