@@ -4082,7 +4082,8 @@
     "message": "Grant customized permissions to members"
   },
   "customDescNonEnterprise": {
-    "message": "Custom roles is an <a href=\"https://bitwarden.com/contact/\" target=\"_blank\">enterprise feature</a>. Contact our support team to upgrade your subscription"
+    "message": "Custom roles is an <a href=\"https://bitwarden.com/contact/\" target=\"_blank\">enterprise feature</a>. Contact our support team to upgrade your subscription",
+    "description": "The text should appear as: 'Custom roles is an enterprise feature. Contact our support team to upgrade your subscription'; 'enterprise feature' is the text of a hyperlink."
   },
   "customNonEnterpriseError": {
     "message": "To enable custom permissions the organization must be on an Enterprise 2020 plan."
