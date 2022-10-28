@@ -20,6 +20,12 @@ export default {
       type: "figma",
       url: "https://www.figma.com/file/f32LSg3jaegICkMu7rPARm/Tailwind-Component-Library-Update?node-id=1881%3A17689",
     },
+    docs: {
+      description: {
+        component:
+          "Directive for toggling the visibility of a password input. Works by either having living inside a `bit-form-field` or by using the `toggled` two-way binding.",
+      },
+    },
   },
 } as Meta;
 
