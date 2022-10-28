@@ -80,8 +80,8 @@ export class BitInputDirective implements BitFormFieldControl {
   ) {}
 
   focus() {
-    const end = this.elementRef.nativeElement.value.length;
     setTimeout(() => {
+      const end = this.elementRef.nativeElement.value.length;
       this.elementRef.nativeElement.setSelectionRange(end, end);
       this.elementRef.nativeElement.focus();
     });
