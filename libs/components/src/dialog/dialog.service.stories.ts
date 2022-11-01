@@ -32,8 +32,8 @@ const actionsData = {
   template: `<button bitButton (click)="openDialog()">{{ buttonText }}</button>`,
 })
 class StoryDialogComponent {
-  @Input() dialogContentComponent: ComponentType<unknown> = StoryDialogContentComponent;
-  @Input() buttonText = "Open Dialog";
+  @Input() dialogContentComponent: ComponentType<unknown>;
+  @Input() buttonText: string;
 
   constructor(public dialogService: DialogService) {}
 
@@ -150,7 +150,11 @@ export default {
 } as Meta;
 
 const Template: Story<StoryDialogComponent> = (args: StoryDialogComponent) => ({
-  props: args,
+  props: {
+    ...args,
+    dialogContentComponent: StoryDialogContentComponent,
+    buttonText: "Open Dialog",
+  },
 });
 
 export const Default = Template.bind({});
@@ -163,4 +167,4 @@ const TabbedTemplate: Story<StoryDialogComponent> = (args: StoryDialogComponent)
   },
 });
 
-export const TabbedDialogService = TabbedTemplate.bind({});
+export const TabbedContent = TabbedTemplate.bind({});
