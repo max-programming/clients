@@ -170,7 +170,7 @@ export class UserAddEditComponent implements OnInit {
   }
 
   async submit() {
-    if (!this.canUseCustomPermissions) {
+    if (!this.canUseCustomPermissions && this.type === OrganizationUserType.Custom) {
       this.platformUtilsService.showToast(
         "error",
         null,
