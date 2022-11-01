@@ -5609,5 +5609,11 @@
   },
   "searchProjects":{
     "message":"Search Projects"
+  },
+  "accessTokens": {
+    "message": "Access tokens"
+  },
+  "createAccessToken": {
+    "message": "Create Access Token"
   }
 }

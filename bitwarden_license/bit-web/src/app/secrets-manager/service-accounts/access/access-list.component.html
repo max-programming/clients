@@ -1,0 +1,55 @@
+<div *ngIf="!tokens" class="tw-items-center tw-justify-center tw-pt-64 tw-text-center">
+  <i class="bwi bwi-spinner bwi-spin bwi-3x"></i>
+</div>
+
+<sm-no-items *ngIf="tokens?.length == 0">
+  <ng-container title>{{ "secretsNoItemsTitle" | i18n }}</ng-container>
+  <ng-container description>{{ "secretsNoItemsMessage" | i18n }}</ng-container>
+  <button bitButton buttonType="secondary" (click)="newSecretEvent.emit()">
+    <i class="bwi bwi-plus" aria-hidden="true"></i>
+    {{ "createAccessToken" | i18n }}
+  </button>
+</sm-no-items>
+
+<bit-table *ngIf="tokens?.length >= 1">
+  <ng-container header>
+    <tr>
+      <th bitCell class="tw-w-0">
+        <div class="tw-flex tw-w-fit tw-gap-2">
+          <input
+            type="checkbox"
+            (change)="$event ? toggleAll() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+          />
+          {{ "all" | i18n }}
+        </div>
+      </th>
+      <th bitCell>{{ "name" | i18n }}</th>
+      <th bitCell>{{ "permissions" | i18n }}</th>
+      <th bitCell>{{ "expires" | i18n }}</th>
+      <th bitCell>{{ "created" | i18n }}</th>
+      <th bitCell class="tw-w-0">
+        <button
+          bitIconButton="bwi-ellipsis-v"
+          buttonType="main"
+          [title]="'options' | i18n"
+          [attr.aria-label]="'options' | i18n"
+          [bitMenuTriggerFor]="tableMenu"
+        ></button>
+      </th>
+    </tr>
+  </ng-container>
+  <ng-container body>
+    <tr bitRow *ngFor="let token of tokens">
+      <td bitCell>
+        <input
+          type="checkbox"
+          (change)="$event ? selection.toggle(token.id) : null"
+          [checked]="selection.isSelected(token.id)"
+        />
+      </td>
+      <td bitCell>{{ token.name }}</td>
+    </tr>
+  </ng-container>
+</bit-table>
