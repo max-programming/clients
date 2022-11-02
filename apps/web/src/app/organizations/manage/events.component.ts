@@ -115,13 +115,7 @@ export class EventsComponent extends BaseEventsComponent implements OnInit {
       return `Installation: ${r.installationId}`;
     }
 
-    if (userId == null) {
-      if (r.systemUser != null) {
-        return {
-          name: EventSystemUser[r.systemUser],
-        };
-      }
-    } else {
+    if (userId != null) {
       if (this.orgUsersUserIdMap.has(userId)) {
         return this.orgUsersUserIdMap.get(userId);
       }
@@ -131,6 +125,12 @@ export class EventsComponent extends BaseEventsComponent implements OnInit {
           name: this.organization.providerName,
         };
       }
+    }
+
+    if (r.systemUser != null) {
+      return {
+        name: EventSystemUser[r.systemUser],
+      };
     }
 
     return null;
