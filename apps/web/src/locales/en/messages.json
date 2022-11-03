@@ -5615,5 +5615,11 @@
   },
   "createAccessToken": {
     "message": "Create Access Token"
+  },
+  "expires": {
+    "message": "Expires"
+  },
+  "canRead": {
+    "message": "Can read"
   }
 }

@@ -3,8 +3,8 @@ import { BaseResponse } from "@bitwarden/common/models/response/base.response";
 export class AccessTokenResponse extends BaseResponse {
   id: string;
   name: string;
-  scope: string[];
-  expiresAt: string;
+  scopes: string[];
+  expireAt: string;
   creationDate: string;
   revisionDate: string;
 
@@ -12,8 +12,8 @@ export class AccessTokenResponse extends BaseResponse {
     super(response);
     this.id = this.getResponseProperty("Id");
     this.name = this.getResponseProperty("Name");
-    this.scope = this.getResponseProperty("ApiKey");
-    this.expiresAt = this.getResponseProperty("ExpiresAt");
+    this.scopes = this.getResponseProperty("Scopes");
+    this.expireAt = this.getResponseProperty("ExpireAt");
     this.creationDate = this.getResponseProperty("CreationDate");
     this.revisionDate = this.getResponseProperty("RevisionDate");
   }

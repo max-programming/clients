@@ -15,7 +15,7 @@
   <ng-container header>
     <tr>
       <th bitCell class="tw-w-0">
-        <div class="tw-flex tw-w-fit tw-gap-2">
+        <label class="tw-m-0 tw-flex tw-w-fit tw-gap-2">
           <input
             type="checkbox"
             (change)="$event ? toggleAll() : null"
@@ -23,7 +23,7 @@
             [indeterminate]="selection.hasValue() && !isAllSelected()"
           />
           {{ "all" | i18n }}
-        </div>
+        </label>
       </th>
       <th bitCell>{{ "name" | i18n }}</th>
       <th bitCell>{{ "permissions" | i18n }}</th>
@@ -50,6 +50,8 @@
         />
       </td>
       <td bitCell>{{ token.name }}</td>
+      <td bitCell>{{ permission(token) | i18n }}</td>
+      <td bitCell>{{ token.expireAt | date: "medium" }}</td>
     </tr>
   </ng-container>
 </bit-table>

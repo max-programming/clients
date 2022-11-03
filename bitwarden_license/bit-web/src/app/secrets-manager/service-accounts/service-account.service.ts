@@ -123,6 +123,8 @@ export class ServiceAccountService {
         const view = new AccessTokenView();
         view.id = s.id;
         view.name = await this.encryptService.decryptToUtf8(new EncString(s.name), orgKey);
+        view.scopes = s.scopes;
+        view.expireAt = new Date(s.expireAt);
 
         return view;
       })
