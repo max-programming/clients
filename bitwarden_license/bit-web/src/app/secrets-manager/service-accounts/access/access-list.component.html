@@ -28,7 +28,7 @@
       <th bitCell>{{ "name" | i18n }}</th>
       <th bitCell>{{ "permissions" | i18n }}</th>
       <th bitCell>{{ "expires" | i18n }}</th>
-      <th bitCell>{{ "created" | i18n }}</th>
+      <th bitCell>{{ "lastEdited" | i18n }}</th>
       <th bitCell class="tw-w-0">
         <button
           bitIconButton="bwi-ellipsis-v"
@@ -52,6 +52,7 @@
       <td bitCell>{{ token.name }}</td>
       <td bitCell>{{ permission(token) | i18n }}</td>
       <td bitCell>{{ token.expireAt | date: "medium" }}</td>
+      <td bitCell>{{ token.revisionDate | date: "medium" }}</td>
     </tr>
   </ng-container>
 </bit-table>

@@ -125,6 +125,8 @@ export class ServiceAccountService {
         view.name = await this.encryptService.decryptToUtf8(new EncString(s.name), orgKey);
         view.scopes = s.scopes;
         view.expireAt = new Date(s.expireAt);
+        view.creationDate = new Date(s.creationDate);
+        view.revisionDate = new Date(s.revisionDate);
 
         return view;
       })
