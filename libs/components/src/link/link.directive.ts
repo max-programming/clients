@@ -29,6 +29,7 @@ const linkStyles: Record<LinkType, string[]> = {
 export class LinkDirective {
   @HostBinding("class") get classList() {
     return [
+      "tw-leading-none",
       "tw-font-semibold",
       "tw-py-0.5",
       "tw-px-0",
